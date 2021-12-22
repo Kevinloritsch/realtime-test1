@@ -12,5 +12,15 @@ helper_method :current_user
             session[:user_id] = @current_user.id
             @current_user
         end
+
+        if @current_user.nil?
+            @current_user = User.generates
+            session[:user_id] = @current_user.id
+            @current_user
+        end
+
+        cookies[:user_id] = @current_user.id
+
+        @current_user
     end
 end
